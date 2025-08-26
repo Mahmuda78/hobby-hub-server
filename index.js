@@ -24,7 +24,8 @@ async function run() {
     await client.connect();
 
     const groupsCollection = client.db('groupDB').collection('groups');
-   
+   const usersCollection = client.db('userDB').collection('users');
+
 
     // get
     app.get('/groups', async (req, res) => {
@@ -40,6 +41,12 @@ async function run() {
       res.send(result)
     })
 
+    app.get('/groups', async (req,res)=>{
+      const email = req.query.email;
+      const query ={ creatEmail : email};
+      const result = await groupsCollection.find(query).toArray();
+      res.send(result)
+    })
     // Add a new group
     app.post('/groups', async (req, res) => {
     const newGroup = req.body;
@@ -47,6 +54,9 @@ async function run() {
    const result = await groupsCollection.insertOne(newGroup);
    res.send(result);
 });
+
+
+
 
 
     // test MongoDB connection
