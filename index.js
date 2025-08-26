@@ -41,13 +41,8 @@ async function run() {
       res.send(result)
     })
 
-    app.get('/groups', async (req,res)=>{
-      const email = req.query.email;
-      const query ={ creatEmail : email};
-      const result = await groupsCollection.find(query).toArray();
-      res.send(result)
-    })
-    // Add a new group
+   
+   
     app.post('/groups', async (req, res) => {
     const newGroup = req.body;
    console.log("Received group:", newGroup);
@@ -64,7 +59,7 @@ app.delete('/groups/:id', async (req,res)=>{
 })
 
 
-    // test MongoDB connection
+    
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
