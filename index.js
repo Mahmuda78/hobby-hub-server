@@ -59,7 +59,7 @@ app.put('/groups/:id', async(req,res)=>{
   const updatedDoc ={
     $set: updatedGroup
   }
-  const result = await groupsCollection.updateOne(filter,options,updatedDoc);
+  const result = await groupsCollection.updateOne(filter,updatedDoc,options);
   res.send(result);
 })
 
