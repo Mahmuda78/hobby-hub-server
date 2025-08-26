@@ -55,7 +55,12 @@ app.put('/groups/:id', async(req,res)=>{
   const id = req.params.id;
   const filter = {_id: new ObjectId(id)}
   const options = {upsert: true};
-  
+  const updatedGroup = req.body;
+  const updatedDoc ={
+    $set: updatedGroup
+  }
+  const result = await groupsCollection.updateOne(filter,options,updatedDoc);
+  res.send(result);
 })
 
 
